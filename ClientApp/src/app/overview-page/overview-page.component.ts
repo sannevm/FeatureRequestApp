@@ -28,6 +28,23 @@ export class OverviewPageComponent implements OnInit, OnDestroy {
       });
   }
 
+  addVote(featureRequestItemList, featureRequestItem) {
+    console.log("Vote was submitted");
+    if (featureRequestItem) {
+      console.log("update is aangeroepen, de id is = ", featureRequestItem.id);
+      featureRequestItem.numberOfVotes += 1;
+      console.log("")
+      this.service.updateFeatureRequestItem(featureRequestItem, featureRequestItem.id)
+        .subscribe(featureRequestItem => {
+          const ix = featureRequestItem ? this.featureRequestItemList.findIndex(h => h.id === featureRequestItem.id) : -1;
+          if (ix > -1) { this.featureRequestItem[ix] = featureRequestItem; }
+        });
+      featureRequestItem = undefined;
+    
+    }
+  }
+
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
