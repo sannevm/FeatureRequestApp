@@ -20,5 +20,10 @@ namespace FeatureRequestAPI.Models
         public Boolean AddedToBacklog { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime LastEditDate { get; set; }
+
+        public FeatureRequestItem()
+        {
+            this.CreationDate = DateTime.Now;
+        }
     }
 }
