@@ -29,6 +29,15 @@ namespace FeatureRequestAPI
 
             services.AddDbContext<FeatureRequestAPIContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("FeatureRequestAPIContext")));
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +48,7 @@ namespace FeatureRequestAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("CorsPolicy");
             app.UseMvc();
         }
     }
