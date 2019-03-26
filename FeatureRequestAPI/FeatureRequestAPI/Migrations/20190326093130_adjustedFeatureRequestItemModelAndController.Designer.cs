@@ -11,9 +11,10 @@ using System;
 namespace FeatureRequestAPI.Migrations
 {
     [DbContext(typeof(FeatureRequestAPIContext))]
-    partial class FeatureRequestAPIContextModelSnapshot : ModelSnapshot
+    [Migration("20190326093130_adjustedFeatureRequestItemModelAndController")]
+    partial class adjustedFeatureRequestItemModelAndController
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
