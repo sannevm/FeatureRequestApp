@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {NgbModal, NgbModule, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-new-request-page',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewRequestPageComponent implements OnInit {
 
-  constructor() { }
+  ngOnInit(){}
 
-  ngOnInit() {
+  add(title: string, description: string): void {
+    console.log("Add wordt aangeroepen!");
+    console.log("The title is: ", title);
+    console.log("The description is: ",  description);
+
   }
 
 }
