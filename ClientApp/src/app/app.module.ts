@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NewRequestPageComponent } from './new-request-page/new-request-page.component';
+import { OverviewPageComponent } from './overview-page/overview-page.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { NewRequestPageComponent } from './new-request-page/new-request-page.com
     FooterComponent,
     HomePageComponent,
     NewRequestPageComponent,
+    OverviewPageComponent,
     
   ],
   imports: [
