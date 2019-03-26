@@ -21,3 +21,4 @@ namespace FeatureRequestAPI.Models
         public DateTime CreationDate { get; set; }
         public DateTime LastEditDate { get; set; }
     }
+}
