@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTableModule, MatSortModule } from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +30,9 @@ import { OverviewPageComponent } from './overview-page/overview-page.component';
     AppRoutingModule,
     NgbModule.forRoot(),
     HttpClientModule,
+    MatTableModule,
+    BrowserAnimationsModule,
+    MatSortModule,
   ],
   providers: [FeatureRequestItemService],
   bootstrap: [AppComponent]
