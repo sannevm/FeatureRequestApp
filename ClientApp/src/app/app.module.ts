@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-import { MatTableModule } from '@angular/material';
+import { MatTableModule, MatSortModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
@@ -32,6 +32,7 @@ import { OverviewPageComponent } from './overview-page/overview-page.component';
     HttpClientModule,
     MatTableModule,
     BrowserAnimationsModule,
+    MatSortModule,
   ],
   providers: [FeatureRequestItemService],
   bootstrap: [AppComponent]
