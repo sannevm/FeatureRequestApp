@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using FeatureRequestAPI.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace FeatureRequestAPI
 {
@@ -30,6 +31,10 @@ namespace FeatureRequestAPI
             services.AddDbContext<FeatureRequestAPIContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("FeatureRequestAPIContext")));
 
+            services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
+                    .AddEntityFrameworkStores<FeatureRequestAPIContext>()
+                    .AddDefaultTokenProviders();
+
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
@@ -49,6 +54,7 @@ namespace FeatureRequestAPI
             }
 
             app.UseCors("CorsPolicy");
+            app.UseIdentity();
             app.UseMvc();
         }
     }
