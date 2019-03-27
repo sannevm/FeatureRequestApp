@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
+  { path: '',   redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomePageComponent},
   { path: 'new-feature-request', component: NewRequestPageComponent},
   { path: 'overview', component: OverviewPageComponent}
