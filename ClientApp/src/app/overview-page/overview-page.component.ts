@@ -2,6 +2,8 @@ import { FeatureRequestItem } from './../models/feature-request-item';
 import { FeatureRequestItemService } from './../services/feature-request-item.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { MatTableDataSource, MatSort } from '@angular/material';
+import { DataSource } from '@angular/cdk/table';
 
 @Component({
   selector: 'app-overview-page',
@@ -13,6 +15,9 @@ export class OverviewPageComponent implements OnInit, OnDestroy {
   subscription:  Subscription;
   featureRequestItemList: FeatureRequestItem[];
   featureRequestItem: FeatureRequestItem;
+  dataSource;
+  displayedColumns: string[] = ['position', 'name', 'description', 'date', 'voteButton', 'numberOfVotes'];
+
 
   constructor(private service: FeatureRequestItemService) { }
 
@@ -21,7 +26,7 @@ export class OverviewPageComponent implements OnInit, OnDestroy {
       results  =>  {
         console.log('Feature Requests are loaded!', results);
         this.featureRequestItemList = results;
-
+        this.dataSource = new MatTableDataSource(this.featureRequestItemList);
       },
       (error)  =>  {
         console.error('Failed ',  error);
