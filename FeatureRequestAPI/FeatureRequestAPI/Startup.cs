@@ -89,31 +89,6 @@ namespace FeatureRequestAPI
             app.UseCors("CorsPolicy");
             app.UseIdentity();
 
-            app.UseCookieAuthentication() {
-                Events = new CookieAuthenticationEvents
-                {
-                    OnSignedIn = context =>
-                    {
-                        Console.WriteLine("{0} - {1}: {2}", DateTime.Now,
-                          "OnSignedIn", context.Principal.Identity.Name);
-                        return Task.CompletedTask;
-                    },
-                    OnSigningOut = context =>
-                    {
-                        Console.WriteLine("{0} - {1}: {2}", DateTime.Now,
-                          "OnSigningOut", context.HttpContext.User.Identity.Name);
-                        return Task.CompletedTask;
-                    },
-                    OnValidatePrincipal = context =>
-                    {
-                        Console.WriteLine("{0} - {1}: {2}", DateTime.Now,
-                          "OnValidatePrincipal", context.Principal.Identity.Name);
-                        return Task.CompletedTask;
-                    },
-                };
-
-            }
-
             app.UseMvc();
         }
     }
