@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using FeatureRequestAPI.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace FeatureRequestAPI
 {
@@ -35,6 +36,10 @@ namespace FeatureRequestAPI
                     .AddEntityFrameworkStores<FeatureRequestAPIContext>()
                     .AddDefaultTokenProviders();
 
+            services.ConfigureApplicationCookie(o => o.LoginPath = new PathString("/login"));
+            services.ConfigureApplicationCookie(o => o.LogoutPath = new PathString("/logout"));
+            services.ConfigureApplicationCookie(o => o.AccessDeniedPath = new PathString("/accessdenied"));
+            
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
