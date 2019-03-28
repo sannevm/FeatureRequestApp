@@ -20,5 +20,30 @@ namespace FeatureRequestAPI.Controllers
             _signInManager = signInManager;
         }
 
+        [Route("/login")]
+        public async Task<IActionResult> Login()
+        {
+            return View();
+        }
+
+        [HttpPost("/login")]
+        public async Task<IActionResult> Login(LoginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    throw new Exception("Invalid login attempt");
+
+                }
+            }
+            return View(model);
+        }
+        
     }
 }
