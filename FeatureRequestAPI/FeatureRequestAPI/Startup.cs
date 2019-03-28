@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using FeatureRequestAPI.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Net;
 
 namespace FeatureRequestAPI
 {
@@ -39,16 +41,42 @@ namespace FeatureRequestAPI
             services.ConfigureApplicationCookie(o => o.LoginPath = new PathString("/login"));
             services.ConfigureApplicationCookie(o => o.LogoutPath = new PathString("/logout"));
             services.ConfigureApplicationCookie(o => o.AccessDeniedPath = new PathString("/accessdenied"));
-            
-            services.AddCors(options =>
+            services.ConfigureApplicationCookie(o => o.Events = new CookieAuthenticationEvents()
             {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials());
+                OnRedirectToAccessDenied = context =>
+                {
+                    if (context.Request.Path.StartsWithSegments("/api"))
+                    {
+                        context.Response.StatusCode = 403;
+                        return Task.FromResult(0);
+                    }
+
+                    context.Response.Redirect(context.RedirectUri);
+                    return Task.FromResult(0);
+
+                },
+                OnRedirectToLogin = context =>
+                {
+                    if (context.Request.Path.StartsWithSegments("/api"))
+                    {
+                        context.Response.StatusCode = 401;
+                        return Task.FromResult(0);
+                    }
+
+                    context.Response.Redirect(context.RedirectUri);
+                    return Task.FromResult(0);
+                }
             });
-        }
+
+                services.AddCors(options =>
+                {
+                    options.AddPolicy("CorsPolicy",
+                        builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+                });
+    }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -60,6 +88,32 @@ namespace FeatureRequestAPI
 
             app.UseCors("CorsPolicy");
             app.UseIdentity();
+
+            app.UseCookieAuthentication() {
+                Events = new CookieAuthenticationEvents
+                {
+                    OnSignedIn = context =>
+                    {
+                        Console.WriteLine("{0} - {1}: {2}", DateTime.Now,
+                          "OnSignedIn", context.Principal.Identity.Name);
+                        return Task.CompletedTask;
+                    },
+                    OnSigningOut = context =>
+                    {
+                        Console.WriteLine("{0} - {1}: {2}", DateTime.Now,
+                          "OnSigningOut", context.HttpContext.User.Identity.Name);
+                        return Task.CompletedTask;
+                    },
+                    OnValidatePrincipal = context =>
+                    {
+                        Console.WriteLine("{0} - {1}: {2}", DateTime.Now,
+                          "OnValidatePrincipal", context.Principal.Identity.Name);
+                        return Task.CompletedTask;
+                    },
+                };
+
+            }
+
             app.UseMvc();
         }
     }
