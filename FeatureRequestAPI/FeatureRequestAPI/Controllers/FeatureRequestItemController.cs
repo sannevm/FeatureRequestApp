@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FeatureRequestAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FeatureRequestAPI.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     [Route("api/FeatureRequestItem")]
     public class FeatureRequestItemController : Controller
