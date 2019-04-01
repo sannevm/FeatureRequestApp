@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FeatureRequestAPI.Models
 {
-    public class FeatureRequestAPIContext : IdentityDbContext
+    public class FeatureRequestAPIContext : IdentityDbContext<AppUser>
     {
         public FeatureRequestAPIContext (DbContextOptions<FeatureRequestAPIContext> options)
             : base(options)
