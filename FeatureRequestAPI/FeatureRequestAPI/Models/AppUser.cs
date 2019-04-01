@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace FeatureRequestAPI.Models
 {
-    public class ApplicationUser : IdentityUser<Guid>
+    public class AppUser : IdentityUser
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

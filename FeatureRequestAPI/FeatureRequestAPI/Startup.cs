@@ -34,39 +34,35 @@ namespace FeatureRequestAPI
             services.AddDbContext<FeatureRequestAPIContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("FeatureRequestAPIContext")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
-                    .AddEntityFrameworkStores<FeatureRequestAPIContext>()
-                    .AddDefaultTokenProviders();
+            //services.ConfigureApplicationCookie(o => o.LoginPath = new PathString("/login"));
+            //services.ConfigureApplicationCookie(o => o.LogoutPath = new PathString("/logout"));
+            //services.ConfigureApplicationCookie(o => o.AccessDeniedPath = new PathString("/accessdenied"));
+            //services.ConfigureApplicationCookie(o => o.Events = new CookieAuthenticationEvents()
+            //{
+            //    OnRedirectToAccessDenied = context =>
+            //    {
+            //        if (context.Request.Path.StartsWithSegments("/api"))
+            //        {
+            //            context.Response.StatusCode = 403;
+            //            return Task.FromResult(0);
+            //        }
 
-            services.ConfigureApplicationCookie(o => o.LoginPath = new PathString("/login"));
-            services.ConfigureApplicationCookie(o => o.LogoutPath = new PathString("/logout"));
-            services.ConfigureApplicationCookie(o => o.AccessDeniedPath = new PathString("/accessdenied"));
-            services.ConfigureApplicationCookie(o => o.Events = new CookieAuthenticationEvents()
-            {
-                OnRedirectToAccessDenied = context =>
-                {
-                    if (context.Request.Path.StartsWithSegments("/api"))
-                    {
-                        context.Response.StatusCode = 403;
-                        return Task.FromResult(0);
-                    }
+            //        context.Response.Redirect(context.RedirectUri);
+            //        return Task.FromResult(0);
 
-                    context.Response.Redirect(context.RedirectUri);
-                    return Task.FromResult(0);
+            //    },
+            //    OnRedirectToLogin = context =>
+            //    {
+            //        if (context.Request.Path.StartsWithSegments("/api"))
+            //        {
+            //            context.Response.StatusCode = 401;
+            //            return Task.FromResult(0);
+            //        }
 
-                },
-                OnRedirectToLogin = context =>
-                {
-                    if (context.Request.Path.StartsWithSegments("/api"))
-                    {
-                        context.Response.StatusCode = 401;
-                        return Task.FromResult(0);
-                    }
-
-                    context.Response.Redirect(context.RedirectUri);
-                    return Task.FromResult(0);
-                }
-            });
+            //        context.Response.Redirect(context.RedirectUri);
+            //        return Task.FromResult(0);
+            //    }
+            //});
 
                 services.AddCors(options =>
                 {
@@ -87,8 +83,6 @@ namespace FeatureRequestAPI
             }
 
             app.UseCors("CorsPolicy");
-            app.UseIdentity();
-
             app.UseMvc();
         }
     }
