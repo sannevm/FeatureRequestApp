@@ -14,6 +14,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NewRequestPageComponent } from './new-request-page/new-request-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
+import { RequestAccountPageComponent } from './request-account-page/request-account-page.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { OverviewPageComponent } from './overview-page/overview-page.component';
     HomePageComponent,
     NewRequestPageComponent,
     OverviewPageComponent,
+    RequestAccountPageComponent,
     
   ],
   imports: [
