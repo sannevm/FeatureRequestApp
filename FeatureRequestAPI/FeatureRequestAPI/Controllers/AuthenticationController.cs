@@ -35,7 +35,7 @@ namespace FeatureRequestAPI.Controllers
             };
         }
 
-        // POST api/auth/login
+        // POST api/authentication/login
         [HttpPost("login")]
         public async Task<IActionResult> Post([FromBody]CredentialsViewModel credentials)
         {
