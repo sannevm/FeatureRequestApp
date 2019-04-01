@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FeatureRequestAPI.Helpers
 {
-    interface IJwtFactory
+    public interface IJwtFactory
     {
         Task<string> GenerateEncodedToken(string userName, ClaimsIdentity identity);
         ClaimsIdentity GenerateClaimsIdentity(string userName, string id);

@@ -80,9 +80,5 @@ namespace FeatureRequestAPI.Helpers
             }
         }
 
-        ClaimsIdentity IJwtFactory.GenerateClaimsIdentity(string userName, string id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

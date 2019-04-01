@@ -24,9 +24,9 @@ namespace FeatureRequestAPI.Controllers
             _appDbContext = appDbContext;
         }
 
-        // POST api/accounts
+        // POST api/account
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]RegistrationViewModel model)
+        public async Task<IActionResult> Register([FromBody]RegistrationViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -44,5 +44,6 @@ namespace FeatureRequestAPI.Controllers
 
             return new OkObjectResult("Account created");
         }
+
     }
 }
