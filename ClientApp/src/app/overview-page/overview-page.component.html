@@ -27,7 +27,7 @@
         <ng-container matColumnDef="voteButton">
           <th mat-header-cell *matHeaderCellDef> Vote </th>
           <td mat-cell *matCellDef="let element">
-            <button style="color: green;" (click)="addVote(featureRequestItemList,item,$event)"><i
+            <button style="color: green;" (click)="addVote(element)"><i
                 class="fas fa-vote-yea"></i></button>
           </td>
         </ng-container>

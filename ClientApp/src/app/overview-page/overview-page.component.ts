@@ -35,12 +35,10 @@ export class OverviewPageComponent implements OnInit, OnDestroy {
       });
   }
 
-  addVote(featureRequestItemList, featureRequestItem) {
-    console.log("Vote was submitted");
+  addVote(featureRequestItem: FeatureRequestItem) {
+    console.log("Vote was submitted for ", featureRequestItem.name);
     if (featureRequestItem) {
-      console.log("update is aangeroepen, de id is = ", featureRequestItem.id);
       featureRequestItem.numberOfVotes += 1;
-      console.log("")
       this.service.updateFeatureRequestItem(featureRequestItem, featureRequestItem.id)
         .subscribe(featureRequestItem => {
           const ix = featureRequestItem ? this.featureRequestItemList.findIndex(h => h.id === featureRequestItem.id) : -1;
