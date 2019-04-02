@@ -26,10 +26,8 @@ export class FeatureRequestItemService {
   }
 
   updateFeatureRequestItem (featureRequestItem: FeatureRequestItem, id: number): Observable<FeatureRequestItem> {
-    console.log("update wordt aangeroepen");
     httpOptions.headers = httpOptions.headers.set('Authorization', 'my-new-auth-token');
     const url = `${this.apiUrl}/${id}`;
-    console.log("url = ", url);
     return this.http.put<FeatureRequestItem>(url, featureRequestItem, httpOptions);
   }
 
