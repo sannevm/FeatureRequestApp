@@ -45,7 +45,7 @@ export class AuthenticationService {
     this._authNavStatusSource.next(false);
   }
 
-  isLoggedIn() : boolean{
-      return this.loggedIn;
+  isLoggedIn() : boolean {
+      return this.loggedIn; 
   }
 }
