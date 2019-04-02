@@ -30,7 +30,7 @@ import { RequestAccountPageComponent } from './request-account-page/request-acco
     HomePageComponent,
     NewRequestPageComponent,
     OverviewPageComponent,
-    RequestAccountPageComponent,    
+    RequestAccountPageComponent,  
   ],
   imports: [
     BrowserModule,
