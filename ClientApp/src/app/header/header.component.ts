@@ -21,13 +21,11 @@ export class HeaderComponent implements OnInit {
   logout(){
     this.authenticationService.logout;
     this.router.navigate(['/home']);
+    window.location.reload();
   }
 
   isLoggedIn(){
-    //this.authenticationService.isLoggedIn;
     return this.authenticationService.loggedIn;
-
-
   }
 
 }
