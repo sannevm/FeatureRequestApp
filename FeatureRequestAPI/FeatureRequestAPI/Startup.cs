@@ -22,7 +22,7 @@ namespace FeatureRequestAPI
 {
     public class Startup
     {
-        private const string SecretKey = "iNivDmHLpUA223sqsfhqGbMRdRj1PVkH"; // todo: get this from somewhere secure
+        private const string SecretKey = "iNivDmHLpUA223sqsfhqGbMRdRj1PVkH"; // TODO: make sure this is not hard coded 
         private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
 
         public Startup(IHostingEnvironment env)
@@ -142,13 +142,6 @@ namespace FeatureRequestAPI
                 ValidateLifetime = false,
                 ClockSkew = TimeSpan.Zero
             };
-
-            //app.UseJwtBearerAuthentication(new JwtBearerOptions
-            //{
-            //    AutomaticAuthenticate = true,
-            //    AutomaticChallenge = true,
-            //    TokenValidationParameters = tokenValidationParameters
-            //});
 
             app.UseCors("CorsPolicy");
             app.UseMvc();
