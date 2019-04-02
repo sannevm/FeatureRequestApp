@@ -11,23 +11,28 @@ import {NgbModal, NgbModule, ModalDismissReasons} from '@ng-bootstrap/ng-bootstr
 })
 export class NewRequestPageComponent implements OnInit {
 
+  showSuccesMessage : Boolean;
+
   constructor(private service: FeatureRequestItemService){}
 
   ngOnInit(){}
 
   add(name: string, description: string): void {
-    console.log("Add wordt aangeroepen!");
-    console.log("The title is: ", name);
-    console.log("The description is: ",  description);
     name = name.trim();
     description = description.trim();
         
     const newFeatureRequestItem: FeatureRequestItem = {name, description} as FeatureRequestItem;
     this.service.addFeatureRequestItem(newFeatureRequestItem)
       .subscribe(todoItem => {
+        this.showSuccesMessage = true;
         this.service.getAll();
       });
 
+  }
+  
+  close(): void {
+    console.log("close alert is aangeroepen")
+    this.showSuccesMessage = false;
   }
 
 }
