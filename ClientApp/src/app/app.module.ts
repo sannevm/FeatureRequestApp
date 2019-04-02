@@ -21,6 +21,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { NewRequestPageComponent } from './new-request-page/new-request-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { RequestAccountPageComponent } from './request-account-page/request-account-page.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { RequestAccountPageComponent } from './request-account-page/request-acco
     HomePageComponent,
     NewRequestPageComponent,
     OverviewPageComponent,
-    RequestAccountPageComponent,  
+    RequestAccountPageComponent,
+    LoginPageComponent,  
   ],
   imports: [
     BrowserModule,

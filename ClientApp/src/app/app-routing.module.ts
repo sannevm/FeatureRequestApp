@@ -1,3 +1,4 @@
+import { LoginPageComponent } from './login-page/login-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { NewRequestPageComponent } from './new-request-page/new-request-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -11,7 +12,8 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent},
   { path: 'new-feature-request', component: NewRequestPageComponent},
   { path: 'overview', component: OverviewPageComponent},
-  { path: 'account/register', component: RequestAccountPageComponent}
+  { path: 'account/register', component: RequestAccountPageComponent},
+  { path: 'login', component: LoginPageComponent}
 ];
 
 @NgModule({
