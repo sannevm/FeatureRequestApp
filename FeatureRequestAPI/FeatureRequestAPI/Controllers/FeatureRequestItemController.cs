@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FeatureRequestAPI.Controllers
 {
+    [Authorize(Policy = "ApiUser")]
     [Produces("application/json")]
     [Route("api/FeatureRequestItem")]
     public class FeatureRequestItemController : Controller
