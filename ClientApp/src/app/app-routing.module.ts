@@ -1,3 +1,4 @@
+import { UserGuard } from './guards/user.guard';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { NewRequestPageComponent } from './new-request-page/new-request-page.component';
@@ -10,8 +11,8 @@ import { RequestAccountPageComponent } from './request-account-page/request-acco
 const routes: Routes = [
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomePageComponent},
-  { path: 'new-feature-request', component: NewRequestPageComponent},
-  { path: 'overview', component: OverviewPageComponent},
+  { path: 'new-feature-request', component: NewRequestPageComponent, canActivate: [UserGuard]},
+  { path: 'overview', component: OverviewPageComponent, canActivate: [UserGuard]},
   { path: 'account/register', component: RequestAccountPageComponent},
   { path: 'login', component: LoginPageComponent}
 ];

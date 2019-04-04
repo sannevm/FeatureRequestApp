@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatTableModule, MatSortModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +22,7 @@ import { NewRequestPageComponent } from './new-request-page/new-request-page.com
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { RequestAccountPageComponent } from './request-account-page/request-account-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { JwtInterceptor } from './jwt-interceptor';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { LoginPageComponent } from './login-page/login-page.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [FeatureRequestItemService, AuthenticationService, UserService],
+  providers: [FeatureRequestItemService, AuthenticationService, UserService, 
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
