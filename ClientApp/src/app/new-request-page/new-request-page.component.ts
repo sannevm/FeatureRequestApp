@@ -31,7 +31,6 @@ export class NewRequestPageComponent implements OnInit {
   }
   
   close(): void {
-    console.log("close alert is aangeroepen")
     this.showSuccesMessage = false;
   }
 

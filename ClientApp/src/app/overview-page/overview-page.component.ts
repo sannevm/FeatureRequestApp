@@ -25,7 +25,6 @@ export class OverviewPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription  =  this.service.getAll().subscribe(
       results  =>  {
-        console.log('Feature Requests are loaded!', results);
         this.featureRequestItemList = results;
         this.dataSource = new MatTableDataSource(this.featureRequestItemList);
         this.dataSource.sort = this.sort;
@@ -36,7 +35,6 @@ export class OverviewPageComponent implements OnInit, OnDestroy {
   }
 
   addVote(featureRequestItem: FeatureRequestItem) {
-    console.log("Vote was submitted for ", featureRequestItem.name);
     if (featureRequestItem) {
       featureRequestItem.numberOfVotes += 1;
       this.service.updateFeatureRequestItem(featureRequestItem, featureRequestItem.id)
