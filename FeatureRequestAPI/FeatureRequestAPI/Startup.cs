@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using FeatureRequestAPI.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace FeatureRequestAPI
 {
@@ -118,6 +119,36 @@ namespace FeatureRequestAPI
             });
 
             services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+
+            services.ConfigureApplicationCookie(o => o.LoginPath = new PathString("/login"));
+            services.ConfigureApplicationCookie(o => o.LogoutPath = new PathString("/logout"));
+            services.ConfigureApplicationCookie(o => o.AccessDeniedPath = new PathString("/accessdenied"));
+            services.ConfigureApplicationCookie(o => o.Events = new CookieAuthenticationEvents()
+            {
+                OnRedirectToAccessDenied = context =>
+                {
+                    if (context.Request.Path.StartsWithSegments("/api"))
+                    {
+                        context.Response.StatusCode = 403;
+                        return Task.FromResult(0);
+                    }
+
+                    context.Response.Redirect(context.RedirectUri);
+                    return Task.FromResult(0);
+
+                },
+                OnRedirectToLogin = context =>
+                {
+                    if (context.Request.Path.StartsWithSegments("/api"))
+                    {
+                        context.Response.StatusCode = 401;
+                        return Task.FromResult(0);
+                    }
+
+                    context.Response.Redirect(context.RedirectUri);
+                    return Task.FromResult(0);
+                }
+            });
 
             services.AddAutoMapper();
 
