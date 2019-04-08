@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
 using AutoMapper;
 using FeatureRequestAPI.Helpers;
 using FeatureRequestAPI.Models;
@@ -43,6 +44,24 @@ namespace FeatureRequestAPI.Controllers
             await _appDbContext.SaveChangesAsync();
 
             return new OkObjectResult("Account created");
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> AddFeatureRequestItemToAccount([FromBody]AppUserViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            ClaimsPrincipal currentUser = User;
+            var currentUserName = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+            AppUser user = await _userManager.FindByNameAsync(currentUserName);
+            _appDbContext.Users.Attach(user);
+            user.FeatureRequestItems = model.FeatureRequestItems;
+            _appDbContext.Entry(user).Collection("FeatureRequestItems").IsModified = true;
+            _appDbContext.SaveChanges();
+            return new OkObjectResult(user);
         }
 
     }

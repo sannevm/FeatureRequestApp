@@ -12,6 +12,16 @@ namespace FeatureRequestAPI.Models
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AppUser>()
+                .HasMany(b => b.FeatureRequestItems)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<FeatureRequestAPI.Models.FeatureRequestItem> FeatureRequestItem { get; set; }
     }
 }

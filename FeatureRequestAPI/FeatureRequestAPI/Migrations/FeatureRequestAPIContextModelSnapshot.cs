@@ -81,6 +81,8 @@ namespace FeatureRequestAPI.Migrations
 
                     b.Property<bool>("AddedToBacklog");
 
+                    b.Property<string>("AppUserId");
+
                     b.Property<string>("Comment");
 
                     b.Property<DateTime>("CreationDate");
@@ -96,6 +98,8 @@ namespace FeatureRequestAPI.Migrations
                     b.Property<int>("NumberOfVotes");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("FeatureRequestItem");
                 });
@@ -208,6 +212,14 @@ namespace FeatureRequestAPI.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("FeatureRequestAPI.Models.FeatureRequestItem", b =>
+                {
+                    b.HasOne("FeatureRequestAPI.Models.AppUser")
+                        .WithMany("FeatureRequestItems")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

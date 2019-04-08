@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FeatureRequestAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FeatureRequestAPI.Models
+namespace FeatureRequestAPI.ViewModels
 {
-    public class AppUser : IdentityUser
+    public class AppUserViewModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

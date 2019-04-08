@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FeatureRequestAPI.Migrations
 {
-    public partial class initialMigration : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,30 +40,13 @@ namespace FeatureRequestAPI.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "FeatureRequestItem",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    Comment = table.Column<string>(nullable: true),
-                    NumberOfVotes = table.Column<int>(nullable: false),
-                    IsDone = table.Column<bool>(nullable: false),
-                    AddedToBacklog = table.Column<bool>(nullable: false),
-                    CreationDate = table.Column<DateTime>(nullable: false),
-                    LastEditDate = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FeatureRequestItem", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -172,6 +155,32 @@ namespace FeatureRequestAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "FeatureRequestItem",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Comment = table.Column<string>(nullable: true),
+                    NumberOfVotes = table.Column<int>(nullable: false),
+                    IsDone = table.Column<bool>(nullable: false),
+                    AddedToBacklog = table.Column<bool>(nullable: false),
+                    CreationDate = table.Column<DateTime>(nullable: false),
+                    LastEditDate = table.Column<DateTime>(nullable: false),
+                    AppUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FeatureRequestItem", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_FeatureRequestItem_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -210,6 +219,11 @@ namespace FeatureRequestAPI.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FeatureRequestItem_AppUserId",
+                table: "FeatureRequestItem",
+                column: "AppUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
