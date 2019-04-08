@@ -66,6 +66,7 @@ namespace FeatureRequestAPI.Controllers
 
             try
             {
+                featureRequestItem.LastEditDate = DateTime.Now;
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
