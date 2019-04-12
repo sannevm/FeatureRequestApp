@@ -1,0 +1,17 @@
+<nav class="navbar navbar-inverse  navbar-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="/home">FRAPP</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+      <li><a *ngIf="isLoggedIn()" routerLink="/new-feature-request" routerLinkActive="active">New Request</a></li>
+      <li><a *ngIf="isLoggedIn()" routerLink="/overview" routerLinkActive="active">Overview</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" >
+      <li><a *ngIf="!isLoggedIn()" (click)='login()' routerLinkActive="active"><span class = "glyphicon glyphicon-user"></span> Log in</a></li>
+      <li><a *ngIf="isLoggedIn()" (click)='logout()' routerLink="/home" routerLinkActive="active"><span class = "glyphicon glyphicon-user"></span> Log out</a></li>
+    </ul>
+  
+  </div>
+</nav>
