@@ -20,7 +20,7 @@ namespace FeatureRequestAPI
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseUrls("http://localhost:8080")
+                .UseUrls("http://0.0.0.0:8080")
                 .Build();
     }
 }
