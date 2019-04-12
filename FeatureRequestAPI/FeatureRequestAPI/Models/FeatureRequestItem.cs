@@ -26,7 +26,7 @@ namespace FeatureRequestAPI.Models
         public int NumberOfVotes { get; set; }
         public Boolean IsDone { get; set; }
         public Boolean AddedToBacklog { get; set; }
-        private DateTime CreationDate { get; set; }
+        public DateTime CreationDate { get; set; }
         public DateTime LastEditDate { get; set; }
         
         public FeatureRequestItem()

@@ -43,7 +43,7 @@ namespace FeatureRequestAPI
         {
             // Add framework services.
             services.AddDbContext<FeatureRequestAPIContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("FeatureRequestAPIContext")));
+                    options.UseSqlServer(Configuration.GetConnectionString("AzureDbConnection")));
 
             services.AddSingleton<IJwtFactory, JwtFactory>();
 
