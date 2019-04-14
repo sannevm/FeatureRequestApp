@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 export class AuthenticationService {
 
   private currentUserSubject: BehaviorSubject<User>;
-  private apiURL = 'http://localhost:63024/api/authentication';
+  private apiURL = 'http://0.0.0.0:8081/api/authentication';
   public currentUser: Observable<User>;
   public loggedIn : boolean;
   private _authNavStatusSource = new BehaviorSubject<boolean>(false);

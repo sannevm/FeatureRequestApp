@@ -11,7 +11,7 @@ import { headersToString } from 'selenium-webdriver/http';
 export class FeatureRequestItemService {
 
   featureRequestItem: FeatureRequestItem;
-  apiUrl = 'http://localhost:63024/api/featureRequestItem';
+  apiUrl = 'http://0.0.0.0:8081/api/featureRequestItem';
   
   constructor(private http: HttpClient) { }
 
