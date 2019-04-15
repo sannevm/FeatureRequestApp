@@ -1,0 +1,21 @@
+version: "3"
+services:
+    frontend:
+        build: ./ClientApp/.
+        image: featurerequestclientapp:latest
+        ports:
+          - "8080:80"
+        networks:
+            - overlay
+        depends_on:
+            - backend
+    backend:
+        build: ./FeatureRequestAPI/FeatureRequestAPI/.
+        image: featurerequestapi:latest
+        ports:
+          - "8081:80"
+        networks:
+            - overlay
+
+networks:
+  overlay:
